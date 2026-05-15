@@ -1,0 +1,392 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     background: #fefaf7;
+     color: #1e2a1c;
+     font-family: Arial, sans-serif;
+     line-height: 1.45;
+ }
+
+ header {
+     position: sticky;
+     top: 0;
+     width: 100%;
+     height: 70px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     background: white;
+     box-shadow: 0px 1px 5px lightgray;
+     z-index: 100;
+     padding: 0 30px;
+     box-sizing: border-box;
+ }
+
+ .logo {
+     display: flex;
+     align-items: center;
+     text-decoration: none;
+ }
+
+ .logo img {
+     height: 60px;
+     width: auto;
+ }
+
+ nav a {
+     text-decoration: none;
+     color: black;
+     font-size: 16px;
+     padding: 10px 15px;
+     transition: 0.2s;
+     font-weight: 500;
+ }
+
+ nav a:hover {
+     color: #bf9b8c;
+ }
+
+ main {
+     width: 85%;
+     max-width: 1280px;
+     margin: 30px auto 100px auto;
+ }
+
+ .browse-header {
+     margin-bottom: 30px;
+     text-align: center;
+ }
+
+ .browse-header h1 {
+     font-size: 42px;
+     font-weight: normal;
+     color: #2c3e2a;
+     margin-bottom: 10px;
+ }
+
+ .browse-description {
+     font-size: 18px;
+     color: #6b7a63;
+ }
+
+ .clear-btn {
+     display: inline-block;
+     margin-top: 15px;
+     padding: 8px 24px;
+     background: #f0eae4;
+     color: #8b6b5c;
+     text-decoration: none;
+     border-radius: 40px;
+     font-size: 14px;
+     font-weight: 500;
+     transition: all 0.2s ease;
+ }
+
+ .clear-btn:hover {
+     background: #bf9b8c;
+     color: white;
+ }
+
+ .sort-section {
+     background: white;
+     border-radius: 18px;
+     padding: 20px 25px;
+     margin-bottom: 35px;
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     flex-wrap: wrap;
+     gap: 15px;
+ }
+
+ .sort-container {
+     display: flex;
+     align-items: center;
+     gap: 15px;
+     flex-wrap: wrap;
+ }
+
+ .sort-label {
+     font-size: 16px;
+     font-weight: 600;
+     color: #4a5a44;
+ }
+
+ .sort-buttons {
+     display: flex;
+     gap: 12px;
+ }
+
+ .sort-btn {
+     display: inline-block;
+     padding: 8px 20px;
+     background: #f5f2ee;
+     color: #4a5a44;
+     text-decoration: none;
+     border-radius: 40px;
+     font-size: 14px;
+     font-weight: 500;
+     transition: all 0.2s ease;
+ }
+
+ .sort-btn:hover {
+     background: #e8dfd7;
+     transform: translateY(-1px);
+ }
+
+ .sort-btn.active {
+     background: #bf9b8c;
+     color: white;
+     box-shadow: 0 2px 6px rgba(191, 155, 140, 0.3);
+ }
+
+ .results-count {
+     font-size: 14px;
+     color: #8b7a6e;
+     background: #f5f2ee;
+     padding: 5px 15px;
+     border-radius: 40px;
+ }
+
+ .results-count span {
+     font-weight: 700;
+     color: #bf9b8c;
+ }
+
+ .restaurants-grid {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 28px;
+     margin-bottom: 30px;
+ }
+
+ .restaurant-card-wrapper {
+     animation: fadeIn 0.4s ease;
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(10px);
+     }
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .restaurant-card {
+     background: white;
+     border-radius: 20px;
+     overflow: hidden;
+     text-decoration: none;
+     color: inherit;
+     transition: all 0.3s ease;
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+ }
+
+ .restaurant-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.12);
+ }
+
+ .card-image {
+     width: 100%;
+     height: 200px;
+     overflow: hidden;
+     background: #e8dfd7;
+ }
+
+ .card-image img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     transition: transform 0.3s ease;
+ }
+
+ .restaurant-card:hover .card-image img {
+     transform: scale(1.05);
+ }
+
+ .card-info {
+     padding: 18px;
+     flex: 1;
+ }
+
+ .card-info h2 {
+     font-size: 20px;
+     font-weight: 600;
+     margin-bottom: 10px;
+     color: #2c3e2a;
+ }
+
+ .card-location {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 8px;
+     margin-bottom: 12px;
+ }
+
+ .city-tag, .cuisine-tag {
+     font-size: 12px;
+     padding: 4px 12px;
+     border-radius: 30px;
+     font-weight: 500;
+ }
+
+ .city-tag {
+     background: #e8f0e6;
+     color: #4a6b3e;
+ }
+
+ .cuisine-tag {
+     background: #fceee8;
+     color: #bf9b8c;
+ }
+
+ .card-stats {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding-top: 12px;
+     border-top: 1px solid #f0eae4;
+ }
+
+ .rating, .reviews {
+     font-size: 14px;
+     font-weight: 500;
+     color: #6b7a63;
+ }
+
+ .rating span, .reviews span {
+     font-weight: 700;
+     color: #2c3e2a;
+ }
+
+
+
+
+ /* Footer */
+ footer {
+     position: relative;
+     bottom: 0;
+     width: 100%;
+     height: 85px;
+     background: #2c2d2e;
+     display: flex;
+     align-items: center;
+     margin-top: 60px;
+ }
+
+ footer img {
+     height: 60px;
+     width: auto;
+     margin: 0px 40px;
+ }
+
+ footer p {
+     color: white;
+     font-size: 15px;
+ }
+
+ @media screen and (max-width: 1024px) {
+     main {
+         width: 90%;
+     }
+
+     .restaurants-grid {
+         grid-template-columns: repeat(2, 1fr);
+         gap: 24px;
+     }
+ }
+
+ @media screen and (max-width: 768px) {
+     .browse-header h1 {
+         font-size: 32px;
+     }
+
+     .sort-section {
+         flex-direction: column;
+         text-align: center;
+     }
+
+     .sort-container {
+         justify-content: center;
+     }
+
+     .restaurants-grid {
+         grid-template-columns: 1fr;
+         gap: 20px;
+     }
+
+     .card-image {
+         height: 180px;
+     }
+
+     footer img {
+         margin: 0 20px;
+         height: 45px;
+     }
+
+     footer p {
+         font-size: 12px;
+     }
+ }
+
+ @media screen and (max-width: 480px) {
+     main {
+         width: 95%;
+     }
+
+     .browse-header h1 {
+         font-size: 28px;
+     }
+
+     .sort-btn {
+         padding: 6px 16px;
+         font-size: 13px;
+     }
+
+     .card-info h2 {
+         font-size: 18px;
+     }
+ }
+
+ html {
+     overflow-y: auto;
+ }
+
+ body {
+     overflow-y: auto;
+ }
+
+ .back-link {
+     text-align: left;
+     margin-bottom: 20px;
+ }
+
+ .back-home-btn {
+     display: inline-block;
+     padding: 8px 16px;
+     background: #f5f2ee;
+     color: #8b6b5c;
+     text-decoration: none;
+     border-radius: 40px;
+     font-size: 14px;
+     font-weight: 500;
+     transition: all 0.2s ease;
+ }
+
+ .back-home-btn:hover {
+     background: #e8dfd7;
+     transform: translateX(-3px);
+     color: #bf9b8c;
+ }

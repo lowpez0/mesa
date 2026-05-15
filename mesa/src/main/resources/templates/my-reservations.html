@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reservations | Mesa</title>
+    <link rel="stylesheet" href="/css/reservations.css">
+</head>
+<body>
+<header>
+    <a href="/mesa/homepage" class="logo">
+        <img src="/images/mesa-logo.png" alt="Mesa Logo">
+    </a>
+    <nav>
+        <a href="/mesa/homepage">Home</a>
+        <a href="/mesa/browse">Browse</a>
+        <span class="username" th:text="${currentUser}">username</span>
+        <a href="/mesa/logout">Log Out</a>
+    </nav>
+</header>
+
+<main>
+    <h1>My Reservations</h1>
+
+    <div th:if="${reservations.isEmpty()}" class="no-reservations">
+        <p>You don't have any reservations yet.</p>
+        <a href="/mesa/browse" class="browse-btn">Browse Restaurants</a>
+    </div>
+
+    <div th:if="${!reservations.isEmpty()}" class="reservations-grid">
+        <div th:each="reservation : ${reservations}" class="reservation-card">
+            <div class="reservation-header">
+                <h2 th:text="${reservation.restaurantName}">Restaurant Name</h2>
+                <span class="reservation-id">#<span th:text="${reservation.reservationId}">ID</span></span>
+            </div>
+            <div class="reservation-details">
+                <p><strong>Date:</strong> <span th:text="${reservation.date}">Date</span></p>
+                <p><strong>People:</strong> <span th:text="${reservation.numberOfPeople}">1</span></p>
+                <p><strong>Booked at:</strong> <span th:text="${reservation.reservationTime}">Time</span></p>
+            </div>
+            <a th:href="@{/mesa/restaurant/{id}(id=${reservation.restaurantId})}"
+               class="view-restaurant-btn">View Restaurant</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <img src="/images/mesa-logo.png" alt="Mesa Logo">
+    <p>All rights reserved 2026.</p>
+</footer>
+</body>
+</html>

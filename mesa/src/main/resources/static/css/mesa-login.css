@@ -1,0 +1,82 @@
+.signform, .logform{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.visible{
+    opacity: 1;
+    z-index: 1;
+}
+
+.hidden{
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.signform > form, .logform > form{
+    width: 50%;
+    min-height: 500px;
+    min-width: 250px;
+    background: #bf9b8c;
+    border-radius: 50px;
+    display: grid;
+    place-content: center;
+    place-items: center;
+    overflow: auto;
+    box-shadow: 0 0 20px rgb(22, 41, 53);
+    padding: 50px;
+}
+
+.signup > input, .login > input{
+    display: block;
+    margin: 20px 0px;
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    height: 30px;
+    min-width: 200px;
+}
+
+.signup > h2, .login > h2{
+    text-align: center;
+    display: inline-block;
+}
+
+input[type="submit"]{
+    background: #ad795b;
+    height: 40px;
+    padding: 10px;
+}
+
+input[type="submit"]:hover{
+    filter: brightness(85%);
+    cursor: pointer;
+}
+
+input[type="submit"]:active{
+    filter: brightness(70%);
+}
+
+form > button{
+    border: none;
+    background: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+form > button:hover{
+    cursor: pointer;
+    color: gray;
+}
+
+form > button:active{
+    color: darkgray;
+}

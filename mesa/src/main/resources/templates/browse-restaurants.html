@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle} + ' | Mesa'">Browse Restaurants | Mesa</title>
+    <link rel="stylesheet" type="text/css" href="/css/browse-restaurants.css">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/mesa/homepage}" class="logo">
+        <img src="/images/mesa-logo.png" alt="Mesa Logo">
+    </a>
+    <nav>
+        <a th:if="${!isLoggedIn}" href="/mesa/login">Log In</a>
+        <a th:if="${isLoggedIn}" href="/mesa/my-reservations">My Reservations</a>
+        <span th:if="${isLoggedIn}" class="username" th:text="${currentUser}"></span>
+        <a th:if="${isLoggedIn}" href="/mesa/logout">Log Out</a>
+    </nav>
+</header>
+
+<main>
+    <section class="browse-header">
+        <h1 th:text="${pageTitle}">All Restaurants</h1>
+        <p class="browse-description" th:text="${filterDesc}">Discover amazing dining experiences</p>
+        <div class="back-link">
+            <a th:href="@{/mesa/homepage}" class="back-home-btn">← Back to Homepage</a>
+        </div>
+    </section>
+
+    <section class="sort-section">
+        <div class="sort-container">
+            <span class="sort-label">Sort by:</span>
+            <div class="sort-buttons">
+                <a th:href="@{/mesa/browse(cuisine=${activeCuisine}, city=${activeCity}, sort='reviews')}"
+                   th:classappend="${currentSort == 'reviews'} ? 'sort-btn active' : 'sort-btn'"
+                   class="sort-btn">
+                    Most Reviewed
+                </a>
+                <a th:href="@{/mesa/browse(cuisine=${activeCuisine}, city=${activeCity}, sort='rating')}"
+                   th:classappend="${currentSort == 'rating'} ? 'sort-btn active' : 'sort-btn'"
+                   class="sort-btn">
+                    Highest Rated
+                </a>
+            </div>
+        </div>
+
+        <div class="results-count">
+            <span th:text="${allRestaurantsCount}">0</span> restaurants found
+        </div>
+    </section>
+
+    <section class="restaurants-section">
+        <div class="restaurants-grid" id="restaurantsGrid">
+            <div th:each="restaurant : ${restaurants}" class="restaurant-card-wrapper">
+                <a th:href="@{/mesa/restaurant/{id}(id=${restaurant.storeId})}" class="restaurant-card">
+                    <div class="card-image">
+                        <img th:src="@{${restaurant.imagePath}}" th:alt="${restaurant.storeName}">
+                    </div>
+                    <div class="card-info">
+                        <h2 th:text="${restaurant.storeName}">Restaurant Name</h2>
+                        <div class="card-location">
+                            <span class="city-tag" th:text="${restaurant.city}">City</span>
+                            <span class="cuisine-tag" th:text="${restaurant.foodType}">Cuisine</span>
+                        </div>
+                        <div class="card-stats">
+                            <div class="rating">
+                                ⭐ <span th:text="${#numbers.formatDecimal(restaurant.avgRating, 1, 1)}">4.5</span>
+                            </div>
+                            <div class="reviews">
+                                📋 <span th:text="${restaurant.totalRating}">100</span> reviews
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <img src="/images/mesa-logo.png" alt="Mesa Logo">
+    <p>All rights reserved 2026.</p>
+</footer>
+
+</body>
+</html>

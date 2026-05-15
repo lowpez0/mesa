@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${restaurant.storeName} + ' | Mesa'">Restaurant Details | Mesa</title>
+    <link rel="stylesheet" th:href="@{/css/restaurant-details.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/mesa/homepage}" class="logo">
+        <img th:src="@{/images/mesa-logo.png}" alt="Mesa Logo">
+    </a>
+    <nav>
+        <a th:if="${!isLoggedIn}" href="/mesa/login">Log In</a>
+        <a th:if="${isLoggedIn}" href="/mesa/my-reservations">My Reservations</a>
+        <span th:if="${isLoggedIn}" class="username" th:text="${currentUser}"></span>
+        <a th:if="${isLoggedIn}" href="/mesa/logout">Log Out</a>
+    </nav>
+</header>
+
+<main>
+    <section class="restaurant-details">
+        <div class="restaurant-image-wrapper">
+            <img th:src="@{${restaurant.imagePath}}" class="restaurant-main-image" alt="Restaurant image">
+        </div>
+        <div class="restaurant-details-info">
+            <h1 th:text="${restaurant.storeName}">Restaurant Name</h1>
+            <p class="restaurant-location" th:text="${restaurant.city}">City</p>
+            <p class="restaurant-food-type" th:text="${restaurant.foodType}">Food Type</p>
+            <div class="restaurant-meta">
+                <span>⭐ <span th:text="${#numbers.formatDecimal(restaurant.avgRating, 1, 1)}">4.5</span></span>
+                <span><span th:text="${restaurant.totalRating}">100</span> reservations</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="bottom-two-columns">
+        <div class="reviews-column">
+            <section class="reviews-section">
+                <h1>Reviews</h1>
+
+                <div th:if="${restaurant.reviewList == null or restaurant.reviewList.isEmpty()}" class="no-reviews">
+                    <p>No reviews available for this restaurant.</p>
+                </div>
+
+                <div th:if="${restaurant.reviewList != null and !restaurant.reviewList.isEmpty()}" class="reviews-container">
+                    <div class="review-card" th:each="review : ${restaurant.reviewList}">
+                        <p class="review-text" th:text="${review.reviewText}">Review text</p>
+                        <div class="review-meta">
+                            <span th:text="${review.reviewerID}">Reviewer ID</span>
+                            <span th:text="${review.dateTime}">Date</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="reservation-column">
+            <section class="reservation-section">
+                <h1>Reserve a Spot</h1>
+                <form th:action="@{/mesa/reserve}" method="post" class="reservation-form">
+                    <input type="hidden" name="restaurantId" th:value="${restaurant.storeId}">
+
+                    <div class="form-group">
+                        <label for="reservationDate">Reservation Date</label>
+                        <input type="date" id="reservationDate" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberOfPeople">Number of People</label>
+                        <select id="numberOfPeople" name="numberOfPeople" required>
+                            <option value="" disabled selected>Select number of people</option>
+                            <option th:each="num : ${#numbers.sequence(1, 10)}"
+                                    th:value="${num}"
+                                    th:text="${num}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div th:if="${!isLoggedIn}" class="login-notice">
+                        <p>Please <a href="/mesa/login">log in</a> to make a reservation</p>
+                    </div>
+
+                    <button type="submit" th:disabled="${!isLoggedIn}">Reserve</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <img th:src="@{/images/mesa-logo.png}" alt="Mesa Logo">
+    <p>All rights reserved 2026.</p>
+</footer>
+
+</body>
+</html>

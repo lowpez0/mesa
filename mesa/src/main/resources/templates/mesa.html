@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Mesa</title>
+    <link rel="stylesheet" type="text/css" href="/css/mesa.css">
+</head>
+<body>
+<header>
+    <a th:href="@{/mesa/homepage}" class="logo">
+        <img src="/images/mesa-logo.png">
+    </a>
+    <nav>
+        <a th:if="${!isLoggedIn}" href="/mesa/login">Log In</a>
+        <a th:if="${isLoggedIn}" href="/mesa/my-reservations">My Reservations</a>
+        <span th:if="${isLoggedIn}" class="username" th:text="${currentUser}"></span>
+        <a th:if="${isLoggedIn}" href="/mesa/logout">Log Out</a>
+    </nav>
+
+</header>
+
+<main>
+    <section class="intro">
+        <h1>MESA: Restaurant Discovery and Reservations</h1>
+        <h3>
+            Welcome to Mesa, a restaurant discovery platform
+            developed to make finding a place to eat easier
+            than ever.
+        </h3>
+    </section>
+
+    <section>
+        <h1>Popular Restaurants</h1>
+
+        <div class="popular-restaurants">
+
+            <a th:each="restaurant : ${topRestaurants}"
+               th:href="@{/mesa/restaurant/{id}(id=${restaurant.storeId})}"
+               class="restaurant-card">
+
+                <img th:src="@{${restaurant.imagePath}}"
+                     alt="Restaurant Image">
+
+                <div class="restaurant-info">
+
+                    <h2 th:text="${restaurant.storeName}">
+                        Restaurant Name
+                    </h2>
+
+                    <p class="restaurant-city"
+                       th:text="${restaurant.city}">
+                        City
+                    </p>
+
+                    <div class="restaurant-meta">
+
+                <span>
+                    ⭐
+                    <span th:text="${#numbers.formatDecimal(restaurant.avgRating,1,1)}">
+                        4.5
+                    </span>
+                </span>
+
+                        <span>
+                    <span th:text="${restaurant.totalRating}">
+                        100
+                    </span>
+                    total reviews
+                </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <h1>Cuisine</h1>
+
+        <div class="foods">
+
+            <a th:href="@{/mesa/browse(cuisine='filipino')}" class="food-card">
+                <img src="/images/filipino.jpg">
+                <span>Filipino</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='japanese')}" class="food-card">
+                <img src="/images/japanese.jpg">
+                <span>Japanese</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='korean')}" class="food-card">
+                <img src="/images/korean.jpg">
+                <span>Korean</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='asian')}" class="food-card">
+                <img src="/images/asian.jpg">
+                <span>Asian</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='chicken')}" class="food-card">
+                <img src="/images/chicken.jpg">
+                <span>Chicken</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='chinese')}" class="food-card">
+                <img src="/images/chinese.jpg">
+                <span>Chinese</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='seafood')}" class="food-card">
+                <img src="/images/seafood.jpg">
+                <span>Seafood</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='indian')}" class="food-card">
+                <img src="/images/indian.jpg">
+                <span>Indian</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='sushi')}" class="food-card">
+                <img src="/images/sushi.jpg">
+                <span>Sushi</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='cakes')}" class="food-card">
+                <img src="/images/cakes.jpg">
+                <span>Cakes</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='biryani')}" class="food-card">
+                <img src="/images/biryani.jpg">
+                <span>Biryani</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(cuisine='thai')}" class="food-card">
+                <img src="/images/thai.jpg">
+                <span>Thai</span>
+            </a>
+
+        </div>
+
+    </section>
+    <section>
+        <h1>Browse by City</h1>
+        <div class="cities">
+            <a th:href="@{/mesa/browse(city='quezon city')}" class="city-card">
+                <img src="/images/quezon.jpg">
+                <span>Quezon City</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='makati')}" class="city-card">
+                <img src="/images/makati.jpg">
+                <span>Makati</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='davao')}" class="city-card">
+                <img src="/images/davao.jpg">
+                <span>Davao</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='manila')}" class="city-card">
+                <img src="/images/manila.jpg">
+                <span>Manila</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='cebu')}" class="city-card">
+                <img src="/images/cebu.jpg">
+                <span>Cebu</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='taguig')}" class="city-card">
+                <img src="/images/taguig.jpg">
+                <span>Taguig</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='pasig')}" class="city-card">
+                <img src="/images/pasig.jpg">
+                <span>Pasig</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='lapu-lapu')}" class="city-card">
+                <img src="/images/lapulapu.jpg">
+                <span>Lapu-Lapu</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='pasay')}" class="city-card">
+                <img src="/images/pasay.jpg">
+                <span>Pasay</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='dagupan')}" class="city-card">
+                <img src="/images/dagupan.jpg">
+                <span>Dagupan</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='mandaluyong')}" class="city-card">
+                <img src="/images/mandaluyong.jpg">
+                <span>Mandaluyong</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='marikina')}" class="city-card">
+                <img src="/images/marikina.jpg">
+                <span>Marikina</span>
+            </a>
+
+            <a th:href="@{/mesa/browse(city='malolos')}" class="city-card">
+                <img src="/images/malolos.jpg">
+                <span>Malolos</span>
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <img src="/images/mesa-logo.png">
+    <p>All rights reserved 2026.</p>
+</footer>
+
+</body>
+</html>
